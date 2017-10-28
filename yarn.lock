@@ -679,6 +679,10 @@ readable-stream@^2.1.5:
     string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
 
+reflect-metadata@^0.1.10:
+  version "0.1.10"
+  resolved "http://registry.npm.taobao.org/reflect-metadata/download/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
+
 regexp-clone@0.0.1, regexp-clone@^0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/regexp-clone/download/regexp-clone-0.0.1.tgz#a7c2e09891fdbf38fbb10d376fb73003e68ac589"

@@ -4,18 +4,23 @@
         "target": "es6",
         "noImplicitAny": false,
         "moduleResolution": "node",
+        "experimentalDecorators": true,
         "allowJs": true,
         "sourceMap": false,
         "outDir": "dist",
         "baseUrl": ".",
         "watch": true,
         "paths": {
+            "lib/*": [
+                "src/lib/*"
+            ],
             "*": [
-                "node_modules/*",
-                "src/*"
+                "src/*",
+                "node_modules/*"
             ]
         }
     },
+    "modules": "commonjs",
     "exclude": [
         "node_modules/"
     ],

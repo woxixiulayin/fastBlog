@@ -1,10 +1,8 @@
 import * as mongoose from 'mongoose'
-import * as debug from 'debug'
+import debug from './debug'
 import config from '../../config'
 
 const log = debug('mongodb')
-
-debug.enable('mongodb')
 
 log('connecting...')
 

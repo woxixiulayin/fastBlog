@@ -12,6 +12,7 @@
     "marked": "^0.3.6",
     "moment": "^2.19.1",
     "mongoose": "^4.12.4",
+    "reflect-metadata": "^0.1.10",
     "typescript": "^2.5.3"
   }
 }
