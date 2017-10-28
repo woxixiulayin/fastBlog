@@ -6,15 +6,28 @@ import { FastifyInstance } from 'fastify'
 const log = debug('route')
 
 const createRoutes = (app: FastifyInstance) => {
-    Object.keys(controllers).forEach((key: string) => {
-        const controller = new controllers[key]()
-        log(`create controller ${key}`)
-        Object.getOwnPropertyNames(controller).forEach(methodName => {
-            log(`create controller method ${methodName}`)
+    log(`controllers is`, controllers)
+    Object.keys(controllers).forEach((controllerName: string) => {
+
+        const controller = new controllers[controllerName]()
+        // get all methodNames in controller property
+        const methodNames = new Set(Object.getOwnPropertyNames(Object.getPrototypeOf(controller)))
+        // delete method not created by us
+        methodNames.delete('constructor')
+
+        log(`begin to create controller ${controllerName} with method:`, JSON.stringify([...methodNames]))
+
+        methodNames.forEach(methodName => {
             const method = controller[methodName]
+
+            log(`create controller ${controllerName} method: ${methodName}`)
+
             if (typeof method !== 'function') return
+
             const httpMethod = Reflect.getMetadata(symbolHttpMethod, controller, methodName)
-            const path = Reflect.getMetadata(symbolPathKey, controller, method)
+            const path = Reflect.getMetadata(symbolPathKey, controller, methodName)
+
+            log(`create route ${httpMethod} ${path} to use method: ${method}`)
 
             app[httpMethod](path, method)
         })
