@@ -1,0 +1,8 @@
+{
+  "name": "fastBlog",
+  "version": "0.0.1",
+  "description": "a light blog use fastify",
+  "main": "index.js",
+  "author": "Jackson Liu (416883813@qq.com)",
+  "license": "MIT"
+}
