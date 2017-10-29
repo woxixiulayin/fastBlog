@@ -9,6 +9,7 @@
         "sourceMap": false,
         "outDir": "dist",
         "baseUrl": ".",
+        "rootDir": ".",
         "watch": true,
         "paths": {
             "config": [

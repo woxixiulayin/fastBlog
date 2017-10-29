@@ -8,9 +8,8 @@ export default class Home extends BaseController {
 
     @httpGet
     @path('/')
-    root(params) {
+    root() {
         return {
-            params,
             data: 'hello'
         }
     }

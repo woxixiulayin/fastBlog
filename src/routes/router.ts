@@ -23,13 +23,12 @@ const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
             log.info(`create controller ==${controllerName}== method: *${methodName}*`)
 
             if (typeof method !== 'function') return
-            // if not define http method then return
-            if (Reflect.getMetadata(symbolHttpMethod, controller, methodName)) return
-            // if not define path then return
-            if (Reflect.getMetadata(symbolPathKey, controller, methodName)) return
 
             const httpMethod = Reflect.getMetadata(symbolHttpMethod, controller, methodName)
             const path = Reflect.getMetadata(symbolPathKey, controller, methodName)
+
+            // if not define http method then return
+            if (!httpMethod || !path) return
 
             log.info(`create route ${httpMethod} ${path}`)
 

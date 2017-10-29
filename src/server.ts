@@ -1,7 +1,7 @@
 import db from 'lib/mongo'
 import * as fastify from 'fastify'
 import config from '../config'
-import { router, controllers } from './routes'
+import { router, controllers, } from './routes'
 // import { helper } from 'routes'
 
 const app: fastify.FastifyInstance = fastify()
