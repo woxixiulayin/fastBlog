@@ -1,11 +1,10 @@
 import * as mongoose from 'mongoose'
-import debug from './debug'
-import config from '../../config'
+import debug, { debugSwitcher } from './debug'
+import config from 'config'
 
-const log = debug('mongodb')
+const log = debug(debugSwitcher.mongodb)
 
-debug.enable('mongodb')
-log('connecting...')
+log.info('connecting...')
 
 const db = mongoose.createConnection(config.mongodb)
 

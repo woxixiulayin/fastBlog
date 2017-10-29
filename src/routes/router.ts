@@ -1,12 +1,12 @@
-import * as controllers from './controllers'
+import { BaseController } from './controllers'
 import { symbolHttpMethod, symbolPathKey } from './helper'
-import debug from 'lib/debug'
+import debug, { debugSwitcher } from 'lib/debug'
 import { FastifyInstance } from 'fastify'
 
-const log = debug('route')
+const log = debug(debugSwitcher.route)
 
-const createRoutes = (app: FastifyInstance) => {
-    log(`controllers is`, controllers)
+const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
+    log.info(`controllers is`, controllers)
     Object.keys(controllers).forEach((controllerName: string) => {
 
         const controller = new controllers[controllerName]()
@@ -15,19 +15,23 @@ const createRoutes = (app: FastifyInstance) => {
         // delete method not created by us
         methodNames.delete('constructor')
 
-        log(`begin to create controller ${controllerName} with method:`, JSON.stringify([...methodNames]))
+        log.info(`begin to create controller ==${controllerName}== with method:`, JSON.stringify([...methodNames]))
 
         methodNames.forEach(methodName => {
             const method = controller[methodName]
 
-            log(`create controller ${controllerName} method: ${methodName}`)
+            log.info(`create controller ==${controllerName}== method: *${methodName}*`)
 
             if (typeof method !== 'function') return
+            // if not define http method then return
+            if (Reflect.getMetadata(symbolHttpMethod, controller, methodName)) return
+            // if not define path then return
+            if (Reflect.getMetadata(symbolPathKey, controller, methodName)) return
 
             const httpMethod = Reflect.getMetadata(symbolHttpMethod, controller, methodName)
             const path = Reflect.getMetadata(symbolPathKey, controller, methodName)
 
-            log(`create route ${httpMethod} ${path} to use method: ${method}`)
+            log.info(`create route ${httpMethod} ${path}`)
 
             app[httpMethod](path, method)
         })

@@ -11,6 +11,9 @@
         "baseUrl": ".",
         "watch": true,
         "paths": {
+            "config": [
+                "config.js"
+            ],
             "*": [
                 "src/*",
                 "node_modules/*"
