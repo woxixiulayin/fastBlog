@@ -16,8 +16,7 @@ export const path = (path: string): Function => {
         const oldMethod = descriptor.value
         descriptor.value = function(req: FastifyRequest, res: FastifyReply) {
             const params = {...req.body, ...req.query}
-            const methodResult = oldMethod.call(this, params)
-            res.send(methodResult)
+            return oldMethod.call(this, params, req, res)
         }
     }
 }

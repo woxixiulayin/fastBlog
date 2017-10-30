@@ -8,10 +8,9 @@ export default class Home extends BaseController {
 
     @httpGet
     @path('/')
-    root() {
-        return {
-            data: 'hello'
-        }
+    root({}, req, reply) {
+        console.log(reply.sendFile)
+        return reply.sendFile('html/index.html')
     }
 
     @httpGet

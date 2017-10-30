@@ -8,6 +8,7 @@
   "dependencies": {
     "@types/debug": "^0.0.30",
     "fastify": "^0.30.3",
+    "fastify-static": "^0.3.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.3",
     "marked": "^0.3.6",
