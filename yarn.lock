@@ -2,9 +2,29 @@
 # yarn lockfile v1
 
 
+"@types/bson@*":
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/@types/bson/download/@types/bson-1.0.4.tgz#94260b6b96fa459346959c9216799d8919e95d2b"
+  dependencies:
+    "@types/node" "*"
+
 "@types/debug@^0.0.30":
   version "0.0.30"
   resolved "http://registry.npm.taobao.org/@types/debug/download/@types/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
+
+"@types/mongodb@*":
+  version "2.2.15"
+  resolved "http://registry.npm.taobao.org/@types/mongodb/download/@types/mongodb-2.2.15.tgz#42577d8a92b9840dad440acf92fea6435c1fcfb3"
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
+"@types/mongoose@4.7.15":
+  version "4.7.15"
+  resolved "http://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-4.7.15.tgz#6a439455ff682c97a393c23c03f6ae5dfb0179c2"
+  dependencies:
+    "@types/mongodb" "*"
+    "@types/node" "*"
 
 "@types/node@*", "@types/node@^8.0.34":
   version "8.0.47"
@@ -111,6 +131,10 @@ balanced-match@^1.0.0:
 beeper@^1.0.0:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/beeper/download/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
+
+bluebird@2.10.2:
+  version "2.10.2"
+  resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
 
 bluebird@^3.5.0:
   version "3.5.1"
@@ -255,6 +279,12 @@ crypto-random-string@^1.0.0:
 dateformat@^2.0.0:
   version "2.2.0"
   resolved "http://registry.npm.taobao.org/dateformat/download/dateformat-2.2.0.tgz#4065e2013cf9fb916ddfd82efb506ad4c6769062"
+
+debug@2.6.8:
+  version "2.6.8"
+  resolved "http://registry.npm.taobao.org/debug/download/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+  dependencies:
+    ms "2.0.0"
 
 debug@2.6.9, debug@^2.6.9:
   version "2.6.9"
@@ -1058,6 +1088,10 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "http://registry.npm.taobao.org/jsonify/download/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
 
+kareem@1.4.1:
+  version "1.4.1"
+  resolved "http://registry.npm.taobao.org/kareem/download/kareem-1.4.1.tgz#ed76200044fa041ef32b4da8261e2553f1173531"
+
 kareem@1.5.0:
   version "1.5.0"
   resolved "http://registry.npm.taobao.org/kareem/download/kareem-1.5.0.tgz#e3e4101d9dcfde299769daf4b4db64d895d17448"
@@ -1205,7 +1239,7 @@ lodash.templatesettings@^3.0.0:
     lodash._reinterpolate "^3.0.0"
     lodash.escape "^3.0.0"
 
-lodash@^4.14.0:
+lodash@4.17.4, lodash@^4.14.0:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -1318,12 +1352,27 @@ moment@^2.19.1:
   version "2.19.1"
   resolved "http://registry.npm.taobao.org/moment/download/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
 
+mongodb-core@2.1.11:
+  version "2.1.11"
+  resolved "http://registry.npm.taobao.org/mongodb-core/download/mongodb-core-2.1.11.tgz#1c38776ceb174997a99c28860eed9028da9b3e1a"
+  dependencies:
+    bson "~1.0.4"
+    require_optional "~1.0.0"
+
 mongodb-core@2.1.17:
   version "2.1.17"
   resolved "http://registry.npm.taobao.org/mongodb-core/download/mongodb-core-2.1.17.tgz#a418b337a14a14990fb510b923dee6a813173df8"
   dependencies:
     bson "~1.0.4"
     require_optional "~1.0.0"
+
+mongodb@2.2.27:
+  version "2.2.27"
+  resolved "http://registry.npm.taobao.org/mongodb/download/mongodb-2.2.27.tgz#34122034db66d983bcf6ab5adb26a24a70fef6e6"
+  dependencies:
+    es6-promise "3.2.1"
+    mongodb-core "2.1.11"
+    readable-stream "2.2.7"
 
 mongodb@2.2.33:
   version "2.2.33"
@@ -1332,6 +1381,23 @@ mongodb@2.2.33:
     es6-promise "3.2.1"
     mongodb-core "2.1.17"
     readable-stream "2.2.7"
+
+mongoose@4.11.1:
+  version "4.11.1"
+  resolved "http://registry.npm.taobao.org/mongoose/download/mongoose-4.11.1.tgz#2560b6d89e744b05857d024cab8b316066716e3e"
+  dependencies:
+    async "2.1.4"
+    bson "~1.0.4"
+    hooks-fixed "2.0.0"
+    kareem "1.4.1"
+    mongodb "2.2.27"
+    mpath "0.3.0"
+    mpromise "0.5.5"
+    mquery "2.3.1"
+    ms "2.0.0"
+    muri "1.2.1"
+    regexp-clone "0.0.1"
+    sliced "1.0.1"
 
 mongoose@^4.12.4:
   version "4.12.4"
@@ -1358,6 +1424,15 @@ mpromise@0.5.5:
   version "0.5.5"
   resolved "http://registry.npm.taobao.org/mpromise/download/mpromise-0.5.5.tgz#f5b24259d763acc2257b0a0c8c6d866fd51732e6"
 
+mquery@2.3.1:
+  version "2.3.1"
+  resolved "http://registry.npm.taobao.org/mquery/download/mquery-2.3.1.tgz#9ab36749714800ff0bb53a681ce4bc4d5f07c87b"
+  dependencies:
+    bluebird "2.10.2"
+    debug "2.6.8"
+    regexp-clone "0.0.1"
+    sliced "0.0.5"
+
 mquery@2.3.2:
   version "2.3.2"
   resolved "http://registry.npm.taobao.org/mquery/download/mquery-2.3.2.tgz#e2c60ad117cf080f2efb1ecdd144e7bbffbfca11"
@@ -1376,6 +1451,10 @@ multipipe@^0.1.2:
   resolved "http://registry.npm.taobao.org/multipipe/download/multipipe-0.1.2.tgz#2a8f2ddf70eed564dff2d57f1e1a137d9f05078b"
   dependencies:
     duplexer2 "0.0.2"
+
+muri@1.2.1:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/muri/download/muri-1.2.1.tgz#ec7ea5ce6ca6a523eb1ab35bacda5fa816c9aa3c"
 
 muri@1.3.0:
   version "1.3.0"
@@ -1707,6 +1786,10 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
+reflect-metadata@0.1.8:
+  version "0.1.8"
+  resolved "http://registry.npm.taobao.org/reflect-metadata/download/reflect-metadata-0.1.8.tgz#72426d570b60776e3688968bd5ab9537a15cecf6"
+
 reflect-metadata@^0.1.10:
   version "0.1.10"
   resolved "http://registry.npm.taobao.org/reflect-metadata/download/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
@@ -2026,6 +2109,20 @@ tsconfig@^5.0.3:
     parse-json "^2.2.0"
     strip-bom "^2.0.0"
     strip-json-comments "^2.0.0"
+
+typegoose@^3.6.0:
+  version "3.6.0"
+  resolved "http://registry.npm.taobao.org/typegoose/download/typegoose-3.6.0.tgz#b0c73b1ff689ef63e3d3a07890a6bec90806b3b2"
+  dependencies:
+    "@types/mongoose" "4.7.15"
+    lodash "4.17.4"
+    mongoose "4.11.1"
+    reflect-metadata "0.1.8"
+    typescript "2.4.2"
+
+typescript@2.4.2:
+  version "2.4.2"
+  resolved "http://registry.npm.taobao.org/typescript/download/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
 
 typescript@^2.5.3:
   version "2.5.3"

@@ -17,6 +17,7 @@
     "pino": "^4.8.1",
     "reflect-metadata": "^0.1.10",
     "tsconfig-paths": "^2.3.0",
+    "typegoose": "^3.6.0",
     "typescript": "^2.5.3"
   }
 }
