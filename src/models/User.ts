@@ -13,11 +13,6 @@ import * as mongoose from 'mongoose'
 
 
 // remember class's name will be used as connection's name, don't waste time on it!!
-// @pre<User> ('save', next => {
-//     if (!this.createdAt) {
-//         this.createdAt = new Date()
-//     }
-// })
 class User extends Typegoose {
     @prop({
         required: true,
@@ -36,15 +31,16 @@ class User extends Typegoose {
     @prop()
     avatar ? : string
 
-    @prop()
-    createdAt ? : string
+    @prop({ required: true, default: Date.now })
+    createdAt ? : Date
 }
 
 const UserModal = new User().getModelForClass(User);
 
 (async() => {
+    await UserModal.findOneAndRemove({ name: 'test' })
     const admin = new UserModal({
-        name: 'myfastblog',
+        name: 'test',
         password: 'admin'
     })
     console.log(admin)
