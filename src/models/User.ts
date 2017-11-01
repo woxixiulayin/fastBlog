@@ -6,18 +6,22 @@ import {
     pre
 } from 'typegoose'
 
+import * as mongoose from 'mongoose'
 /**
  * UserSchema
  */
 
-@pre<UserClass> ('save', next => {
-    if (!this.createdAt) {
-        this.createdAt = new Date()
-    }
-})
-class UserClass extends Typegoose {
+
+// remember class's name will be used as connection's name, don't waste time on it!!
+// @pre<User> ('save', next => {
+//     if (!this.createdAt) {
+//         this.createdAt = new Date()
+//     }
+// })
+class User extends Typegoose {
     @prop({
-        required: true
+        required: true,
+        unique: true,
     })
     name: string
 
@@ -36,24 +40,20 @@ class UserClass extends Typegoose {
     createdAt ? : string
 }
 
-// UserModal
-const User = new UserClass().getModelForClass(UserClass);
+const UserModal = new User().getModelForClass(User);
 
 (async() => {
-    const admin = new User({
-        name: 'admin',
-        password: '123456'
+    const admin = new UserModal({
+        name: 'myfastblog',
+        password: 'admin'
     })
     console.log(admin)
-    admin.save(err => {
-        if (err) {
-            console.log(err)
-        }
-        console.log('OK');
-    })
-    const u = await User.findOne()
+    await admin.save()
+
+    console.log('wait find')
+    const u = await UserModal.findOne()
     console.log(u)
-    console.log('done');
+    console.log('done')
 })()
 
-export default User
+export default UserModal

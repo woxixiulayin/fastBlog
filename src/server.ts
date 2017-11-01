@@ -1,3 +1,5 @@
+import 'lib/mongo'
+import 'models'
 import * as path from 'path'
 import * as fastify from 'fastify'
 import config from '../config'

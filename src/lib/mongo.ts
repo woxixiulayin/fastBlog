@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+import mongoose = require('mongoose')
 import debug, { debugSwitcher } from 'lib/debug'
 import config from 'config'
 
@@ -6,6 +6,13 @@ const log = debug(debugSwitcher.mongodb)
 
 log.info('connecting...')
 
-const db = mongoose.createConnection(config.mongodb)
+mongoose.connect(config.mongodb)
+mongoose.Promise = global.Promise
+
+// 一下这行会打开数据库连接
+const db = mongoose.connection
+
+db.on('error', () => log.error('can not connect mongodb'))
+db.on('open', () => log.info('mongodb has been successfully open'))
 
 export default db
