@@ -5,8 +5,6 @@ import * as fastify from 'fastify'
 import config from '../config'
 import { router, controllers, } from './routes'
 
-// import { helper } from 'routes'
-
 const app: fastify.FastifyInstance = fastify()
 
 app.register(require('fastify-static'), {
@@ -16,7 +14,6 @@ app.register(require('fastify-static'), {
 //   page403Path: path.join(__dirname, 'public', '403.html'), // optional
 //   page500Path: path.join(__dirname, 'public', '500.html')  // optional
 })
-
 
 router.createRoutes(app, controllers)
 

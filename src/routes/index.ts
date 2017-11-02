@@ -1,10 +1,10 @@
 import * as router from './router'
-import * as helper from './helper'
+import * as decorators from './decorators'
 import controllers, { BaseController } from './controllers'
 
 export {
     router,
-    helper,
+    decorators,
     controllers,
     BaseController
 }

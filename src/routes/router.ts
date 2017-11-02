@@ -1,7 +1,7 @@
 import { BaseController } from './controllers'
-import { symbolHttpMethod, symbolPathKey } from './helper'
+import { symbolHttpMethod, symbolPathKey, symbolBefore } from './decorators'
 import debug, { debugSwitcher } from 'lib/debug'
-import { FastifyInstance } from 'fastify'
+import { FastifyInstance, HTTPMethod } from 'fastify'
 
 const log = debug(debugSwitcher.route)
 
@@ -24,15 +24,21 @@ const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
 
             if (typeof method !== 'function') return
 
-            const httpMethod = Reflect.getMetadata(symbolHttpMethod, controller, methodName)
+            const httpMethod: HTTPMethod = Reflect.getMetadata(symbolHttpMethod, controller, methodName)
             const path = Reflect.getMetadata(symbolPathKey, controller, methodName)
+            const beforeHandler = Reflect.getMetadata(symbolBefore, controller, methodName) || null
 
             // if not define http method then return
             if (!httpMethod || !path) return
 
             log.info(`create route ${httpMethod} ${path}`)
 
-            app[httpMethod](path, method)
+            app.route({
+                method: httpMethod,
+                url: path,
+                beforeHandler,
+                handler: method
+            })
         })
     })
 }
