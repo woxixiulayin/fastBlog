@@ -1,5 +1,7 @@
 import 'reflect-metadata'
+import BaseController from './controllers/BaseController'
 import { FastifyRequest, FastifyReply, FastifyMiddleware } from 'fastify'
+const log = require('pino')({ level: 'info' })
 
 export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'GET' | 'POST' | 'DELETE' | 'PUT'
 
@@ -8,7 +10,8 @@ export const symbolHttpMethod = Symbol.for('router:httpMethod')
 export const symbolBefore = Symbol.for('route:auth')
 
 export const path = (path: string): Function => {
-    return (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<Function>) => {
+    return (target: BaseController, propertyKey: string, descriptor: TypedPropertyDescriptor<Function>) => {
+
         Reflect.defineMetadata(symbolPathKey, path, target, propertyKey)
 
         if (!descriptor.value) return
@@ -22,13 +25,13 @@ export const path = (path: string): Function => {
 }
 
 export const httpMethod = (method: HTTPMethod): Function => {
-    return (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<Function>) => {
+    return (target: BaseController, propertyKey: string, descriptor: TypedPropertyDescriptor<Function>) => {
         Reflect.defineMetadata(symbolHttpMethod, method.toUpperCase(), target, propertyKey)
     }
 }
 
 export const before = (handler: Function): Function => {
-    return (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<Function>) => {
+    return (target: BaseController, propertyKey: string, descriptor: TypedPropertyDescriptor<Function>) => {
         if (!descriptor.value) return
 
         const beforeHandler = function(req: FastifyRequest, res: FastifyReply, done) {
@@ -37,7 +40,6 @@ export const before = (handler: Function): Function => {
             done()
         }
         Reflect.defineMetadata(symbolBefore, beforeHandler, target, propertyKey)
-        
     }
 }
 

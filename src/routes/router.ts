@@ -30,12 +30,19 @@ const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
 
             // if not define http method then return
             if (!httpMethod || !path) return
-
-            log.info(`create route ${httpMethod} ${path}`)
+            const baseUrl = controller.baseUrl || '/'
+            if (!path.startsWith('/')) {
+                throw new TypeError(`path should start width /`)
+            }
+            if (!baseUrl.startsWith('/')) {
+                throw new TypeError(` baseUrl should start width /`)
+            }
+            const newPath = baseUrl.concat(path).replace('//', '/')
+            log.info(`create route ${httpMethod} ${newPath}`)
 
             app.route({
                 method: httpMethod,
-                url: path,
+                url: newPath,
                 beforeHandler,
                 handler: method
             })
