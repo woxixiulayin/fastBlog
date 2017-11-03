@@ -37,19 +37,20 @@ class User extends Typegoose {
 
 const UserModal = new User().getModelForClass(User);
 
-(async() => {
-    await UserModal.findOneAndRemove({ name: 'test' })
-    const admin = new UserModal({
-        name: 'test',
-        password: 'admin'
-    })
-    console.log(admin)
-    await admin.save()
+// test code
+// (async() => {
+//     await UserModal.findOneAndRemove({ name: 'test' })
+//     const admin = new UserModal({
+//         name: 'test',
+//         password: 'admin'
+//     })
+//     console.log(admin)
+//     await admin.save()
 
-    console.log('wait find')
-    const u = await UserModal.findOne()
-    console.log(u)
-    console.log('done')
-})()
+//     console.log('wait find')
+//     const u = await UserModal.findOne()
+//     console.log(u)
+//     console.log('done')
+// })()
 
 export default UserModal
