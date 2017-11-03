@@ -40,12 +40,22 @@ const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
             const newPath = baseUrl.concat(path).replace('//', '/')
             log.info(`create route ${httpMethod} ${newPath}`)
 
-            app.route({
+            const widthUrl = (url: string): FastifyInstance => app.route({
                 method: httpMethod,
-                url: newPath,
+                url,
                 beforeHandler,
                 handler: method
             })
+            
+            widthUrl(newPath)
+            if (newPath.length === 1) return
+            if (newPath.endsWith('/')) {
+                log.info(newPath.slice(0, -1))
+                widthUrl(newPath.slice(0, -1))
+            } else {
+                log.info(`${newPath}/`)
+                widthUrl(`${newPath}/`)
+            }
         })
     })
 }
