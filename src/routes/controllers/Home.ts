@@ -10,7 +10,7 @@ export default class Home extends BaseController {
 
     @httpMethod('get')
     @path('/')
-    @before(() => log.info('do something before get / '))
+    @before(() => log.info('this is before handler / '))
     async root({}, req, reply) {
        
         return reply.sendFile('html/index.html')

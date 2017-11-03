@@ -1,5 +1,6 @@
 import { httpMethod, path, before } from '../decorators'
 import { FastifyReply } from 'fastify'
+import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
 import { User } from 'models'
 import BaseController from './BaseController'
 
@@ -19,8 +20,35 @@ export default class Signup extends BaseController {
 
     @httpMethod('post')
     @path('/')
-    signup(param, res, rep: FastifyReply) {
-        log.info('signup:', param)
-        rep.send('yes')
+    async signup(this: Signup, param, res, rep: FastifyReply) {
+        const reply = await this.register(param)
+        rep.send(reply)
+    }
+
+    async register(
+        {
+            name = '',
+            password = '',
+            ...otherParam
+        }: {
+        name: string,
+        password: string,
+        [propName: string]: string,
+    }) {
+        if (!name || !password) {
+            return replyErrors.code400('param is not wrong')
+        }
+
+        let user = await User.findOne({ name })
+        if (user) {
+            return replyErrors.code400('use has already exists')
+        }
+        user = new User({ name, password, ...otherParam})
+        try {
+            await user.save()
+            return reply200()
+        } catch (e) {
+            return replyErrors.code500('internal error, can not save user')
+        }
     }
 }

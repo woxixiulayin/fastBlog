@@ -19,7 +19,8 @@ export const path = (path: string): Function => {
         const oldMethod = descriptor.value
         descriptor.value = function(req: FastifyRequest, res: FastifyReply) {
             const params = {...req.body, ...req.query}
-            return oldMethod.call(this, params, req, res)
+            // oldMethod should be called in target not this - -!
+            return oldMethod.call(target, params, req, res)
         }
     }
 }

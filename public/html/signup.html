@@ -14,8 +14,8 @@
     <script>
         $('#submit').click(() => {
             $.post('/signup', {
-                name: $("input[type=name]").val(),
-                password: $("input[type=password]").val(),
+                name: $("input[name=name]").val(),
+                password: $("input[name=password]").val(),
             })
         })
     </script>
