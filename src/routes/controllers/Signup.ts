@@ -48,6 +48,7 @@ export default class Signup extends BaseController {
             await user.save()
             return reply200()
         } catch (e) {
+            log.error(e)
             return replyErrors.code500('internal error, can not save user')
         }
     }

@@ -4,22 +4,29 @@ interface IAjaxReturn {
     data: object,
 }
 
-const reply200: (param?: {
-    msg?: string,
-    data?: object
-}) => IAjaxReturn = ({
+function reply200 ({
     msg = 'ok',
     data = null,
-}): IAjaxReturn => ({
+}: {
+    msg?: string,
+    data?: object
+} = {}): IAjaxReturn {
+    return {
     statusCode: 200,
     message: msg,
     data
+}}
+
+const shapeError = (statusCode: number): Function => (message: string): IAjaxReturn => ({
+    statusCode,
+    message,
+    data: null
 })
 
 const replyErrors = {
-    code200: (msg): IAjaxReturn => ({ statusCode: 200, message: msg, data: null }),
-    code400: (msg): IAjaxReturn => ({ statusCode: 200, message: msg, data: null }),
-    code500: (msg): IAjaxReturn => ({ statusCode: 200, message: msg, data: null }),
+    code400: shapeError(400),
+    code401: shapeError(401),
+    code500: shapeError(500)
 }
 
 export {
