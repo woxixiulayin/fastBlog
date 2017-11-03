@@ -36,7 +36,7 @@ export default class Signup extends BaseController {
         [propName: string]: string,
     }) {
         if (!name || !password) {
-            return replyErrors.code400('param is not wrong')
+            return replyErrors.code400('param is not right')
         }
 
         let user = await User.findOne({ name })
