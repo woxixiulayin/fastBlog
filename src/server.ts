@@ -14,6 +14,9 @@ app.register(require('fastify-static'), {
 //   page403Path: path.join(__dirname, 'public', '403.html'), // optional
 //   page500Path: path.join(__dirname, 'public', '500.html')  // optional
 })
+app.register(require('fastify-formbody'), {}, (err) => {
+  if (err) throw err
+})
 
 router.createRoutes(app, controllers)
 

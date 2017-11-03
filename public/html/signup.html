@@ -4,15 +4,19 @@
 </head>
 <body>
     <h1>注册</h1>
-    <div>
-        <div>
-            <label for="name">用户名</label>
-            <input name="name" type="text">
-        </div>
-        <div>
-            <label for="password">密码</label>
-            <input name="password" type="password">
-        </div>
-        <button>注册</button>
+    <div id="form">
+        <p>用户名：<input type="text" name="name"></p>
+        <p>密码：<input type="password" name="password"></p>
+        <button id="submit">提交</button>
     </div>
+
+    <script src="/public/global_modules/zepto.js"></script>
+    <script>
+        $('#submit').click(() => {
+            $.post('/signup', {
+                name: $("input[type=name]").val(),
+                password: $("input[type=password]").val(),
+            })
+        })
+    </script>
 </body>

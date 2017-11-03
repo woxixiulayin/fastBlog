@@ -1,4 +1,5 @@
 import { httpMethod, path, before } from '../decorators'
+import { FastifyReply } from 'fastify'
 import { User } from 'models'
 import BaseController from './BaseController'
 
@@ -14,5 +15,12 @@ export default class Signup extends BaseController {
     @path('/')
     root(param, res, rep) {
         rep.sendFile('html/signup.html')
+    }
+
+    @httpMethod('post')
+    @path('/')
+    signup(param, res, rep: FastifyReply) {
+        log.info('signup:', param)
+        rep.send('yes')
     }
 }
