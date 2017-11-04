@@ -7,6 +7,7 @@
     <div id="form">
         <p>用户名：<input type="text" name="name"></p>
         <p>密码：<input type="password" name="password"></p>
+        <p id="result"></p>
         <button id="submit">提交</button>
     </div>
 
@@ -16,6 +17,13 @@
             $.post('/signup', {
                 name: $("input[name=name]").val(),
                 password: $("input[name=password]").val(),
+            }, data => {
+                console.log(data)
+                if (data.statusCode === 400) {
+                    $('#result').html('用户已存在');
+                } else if (data.statusCode === 200) {
+                    $('#result').html('注册成功');
+                }
             })
         })
     </script>
