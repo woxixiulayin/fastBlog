@@ -6,7 +6,6 @@ import {
     pre
 } from 'typegoose'
 
-import * as mongoose from 'mongoose'
 /**
  * UserSchema
  */

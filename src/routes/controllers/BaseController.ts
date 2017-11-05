@@ -1,7 +1,6 @@
-import debug, { debugSwitcher } from 'lib/debug'
+import * as pino from 'pino'
 
-const log = debug(debugSwitcher.route)
-
+const log = pino()
 
 export default class BaseController extends Object {
 

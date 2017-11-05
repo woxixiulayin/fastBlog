@@ -1,9 +1,9 @@
 import { BaseController } from './controllers'
 import { symbolHttpMethod, symbolPathKey, symbolBefore } from './decorators'
-import debug, { debugSwitcher } from 'lib/debug'
 import { FastifyInstance, HTTPMethod } from 'fastify'
+import * as pino from 'pino'
 
-const log = debug(debugSwitcher.route)
+const log = pino()
 
 const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
     log.info(`controllers is`, controllers)

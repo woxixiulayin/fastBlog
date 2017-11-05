@@ -1,8 +1,8 @@
 import mongoose = require('mongoose')
-import debug, { debugSwitcher } from 'lib/debug'
+import * as pino from 'pino'
 import config from 'config'
 
-const log = debug(debugSwitcher.mongodb)
+const log = pino()
 
 log.info('connecting...')
 

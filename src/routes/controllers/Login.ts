@@ -1,8 +1,8 @@
+import { session } from './../../interface/IFastify';
 import { httpMethod, path, before } from '../decorators'
 import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
-import * as session from 'fastify-session'
 import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
-import { User } from 'models'
+import { User, Session } from 'models'
 import BaseController from './BaseController'
 
 export default class Login extends BaseController {
@@ -11,17 +11,24 @@ export default class Login extends BaseController {
         this.baseUrl = '/login'
     }
 
-    static async checkUserLogin(req: IFastifyRequest, res: IFastifyReply) {
+    static async checkUserNotLogin(req: IFastifyRequest, res: IFastifyReply) {
         const sessionId = req.session.sessionId
         if (!sessionId) {
-            res.send(replyErrors.code401('not verified'))
+            res.send(replyErrors.code500('can not get session id'))
         }
+
+        let session = await Session.findOne({ sessionId })
+
+        if (session) {
+            res.redirect(200, '/')
+        }
+
     }
 
     @httpMethod('get')
     @path('/')
     async root(param, req: IFastifyRequest, res: IFastifyReply) {
-        await Login.checkUserLogin(req, res)
+        await Login.checkUserNotLogin(req, res)
         res.sendFile('html/login.html')
     }
 
@@ -42,9 +49,14 @@ export default class Login extends BaseController {
             res.send(replyErrors.code400('param error'))
         }
 
-        const user = await User.findOne({
-            name,
-        })
+        let user
+        try {
+             user = await User.findOne({
+                name,
+            })
+        } catch (e) {
+            throw e
+        }
 
         if (!user) {
             res.send(replyErrors.code404('name not find'))
@@ -54,6 +66,27 @@ export default class Login extends BaseController {
             res.send(replyErrors.code400('password wrong'))
         }
 
-        res.send(reply200())
+        if (!user._id) {
+            res.send(replyErrors.code404('not find user'))
+        }
+
+        const sessionId = req.session.sessionId
+
+        if (!sessionId) {
+            res.send(replyErrors.code500('can not create session'))
+        }
+
+        const session = new Session({
+            sessionId,
+            uuid: user._id
+        })
+
+        try {
+            await session.save()
+            res.redirect(200, '200')
+        } catch (e) {
+            throw e
+        }
+
     }
 }

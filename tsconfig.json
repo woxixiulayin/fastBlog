@@ -8,7 +8,6 @@
         "experimentalDecorators": true,
         "allowJs": true,
         "sourceMap": false,
-        "outDir": "dist",
         "baseUrl": ".",
         "rootDir": ".",
         "watch": true,
