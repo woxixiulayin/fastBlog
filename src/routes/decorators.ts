@@ -36,8 +36,7 @@ export const before = (handler: Function): Function => {
         if (!descriptor.value) return
 
         const beforeHandler = function(req: FastifyRequest, res: FastifyReply, done) {
-            const params = {...req.body, ...req.params}
-            handler.call(this, params, req, res)
+            handler.call(target, req, res, done)
             done()
         }
         Reflect.defineMetadata(symbolBefore, beforeHandler, target, propertyKey)

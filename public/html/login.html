@@ -3,7 +3,7 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <h1>注册</h1>
+    <h1>登录</h1>
     <div id="form">
         <p>用户名：<input type="text" name="name"></p>
         <p>密码：<input type="password" name="password"></p>
@@ -14,15 +14,15 @@
     <script src="/public/global_modules/zepto.js"></script>
     <script>
         $('#submit').click(() => {
-            $.post('/signup', {
+            $.post('/login', {
                 name: $("input[name=name]").val(),
                 password: $("input[name=password]").val(),
             }, data => {
                 console.log(data)
-                if (data.statusCode === 400) {
-                    $('#result').html('用户已存在');
-                } else if (data.statusCode === 200) {
-                    $('#result').html('注册成功');
+                if (data.statusCode === 200) {
+                    $('#result').html('登录成功');
+                } else if (data.statusCode !== 200) {
+                    $('#result').html('登录失败');
                 }
             })
         })

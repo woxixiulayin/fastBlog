@@ -12,10 +12,6 @@
         "baseUrl": ".",
         "rootDir": ".",
         "watch": true,
-        "types": [
-            // add node as an option
-            "node"
-         ],
         "paths": {
             "config": [
                 "config.js"

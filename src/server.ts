@@ -22,6 +22,7 @@ app.register(require('fastify-formbody'), {}, (err) => {
 app.register(require('fastify-cookie'), {}, (err) => {
   if (err) throw err
 })
+  
 
 app.register(require('fastify-session'), {
     secret: '123456',
