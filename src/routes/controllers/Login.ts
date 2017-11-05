@@ -1,9 +1,11 @@
-import { session } from './../../interface/IFastify';
 import { httpMethod, path, before } from '../decorators'
 import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
 import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
 import { User, Session } from 'models'
 import BaseController from './BaseController'
+import * as pino from 'pino'
+
+const log = pino()
 
 export default class Login extends BaseController {
     constructor() {
@@ -11,24 +13,44 @@ export default class Login extends BaseController {
         this.baseUrl = '/login'
     }
 
-    static async checkUserNotLogin(req: IFastifyRequest, res: IFastifyReply) {
+    static async checkAuthority(req: IFastifyRequest, rep: IFastifyReply) {
+
         const sessionId = req.session.sessionId
+
         if (!sessionId) {
-            res.send(replyErrors.code500('can not get session id'))
+            rep.send(replyErrors.code500('session is not set'))
         }
 
-        let session = await Session.findOne({ sessionId })
-
-        if (session) {
-            res.redirect(200, '/')
+        let session
+        try {
+            session = await Session.findOne({ sessionId })
+            if (session) {
+                return true
+            }
+        } catch(e) {
+            throw e
         }
+        return false
+    }
 
+    static async needAuth(req: IFastifyRequest, res: IFastifyReply) {
+        const isAuthorized = await Login.checkAuthority(req, res)
+        if (!isAuthorized) {
+            res.send(replyErrors.code400('not authorized'))
+        }
     }
 
     @httpMethod('get')
     @path('/')
     async root(param, req: IFastifyRequest, res: IFastifyReply) {
-        await Login.checkUserNotLogin(req, res)
+        const isAuthorized = await Login.checkAuthority(req, res)
+
+        if (res.sent) return
+
+        if(isAuthorized) {
+            return res.send(replyErrors.code405('has already login'))
+        }
+
         res.sendFile('html/login.html')
     }
 
@@ -45,8 +67,15 @@ export default class Login extends BaseController {
         password = '',
     } = {}, req: IFastifyRequest, res: IFastifyReply) {
 
+        const isAuthorized = await Login.checkAuthority(req, res)
+
+        if (isAuthorized) {
+           return res.send(replyErrors.code405('has login')) 
+        }
+
+        log.info('has login?: ', isAuthorized)
         if (!name || !password) {
-            res.send(replyErrors.code400('param error'))
+            return res.send(replyErrors.code400('param error'))
         }
 
         let user
@@ -59,21 +88,29 @@ export default class Login extends BaseController {
         }
 
         if (!user) {
-            res.send(replyErrors.code404('name not find'))
+            return res.send(replyErrors.code404('name not find'))
         }
 
         if (user.password !== password) {
-            res.send(replyErrors.code400('password wrong'))
+            return res.send(replyErrors.code400('password wrong'))
         }
 
-        if (!user._id) {
-            res.send(replyErrors.code404('not find user'))
+        log.info('user:', user)
+
+        try {
+            await Session.find({
+                uuid: user._id
+            }).remove()
+        } catch (e) {
+            log.info(e)
+            throw e
         }
 
         const sessionId = req.session.sessionId
+        log.info(sessionId)
 
         if (!sessionId) {
-            res.send(replyErrors.code500('can not create session'))
+            return res.send(replyErrors.code500('can not create session'))
         }
 
         const session = new Session({
@@ -83,7 +120,8 @@ export default class Login extends BaseController {
 
         try {
             await session.save()
-            res.redirect(200, '200')
+            log.info(user, 'login')
+            return res.send(reply200())
         } catch (e) {
             throw e
         }

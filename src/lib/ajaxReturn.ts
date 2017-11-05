@@ -5,7 +5,7 @@ interface IAjaxReturn {
 }
 
 function reply200 ({
-    msg = 'ok',
+    msg = 'success',
     data = null,
 }: {
     msg?: string,
@@ -32,6 +32,8 @@ const replyErrors = {
     code403: shapeError(403),
     // checkUserLogin: 服务器无法根据客户端的请求找到资源（网页
     code404: shapeError(404),
+    // 客户端请求的方法被禁止
+    code405: shapeError(405),
     // 	Internal Server Error: 服务器内部错误，无法完成请求
     code500: shapeError(500)
 }
