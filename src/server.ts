@@ -20,7 +20,10 @@ app.register(require('fastify-formbody'), {}, (err) => {
 })
 
 app.register(require('fastify-cookie'), {}, (err) => {
-  if (err) throw err
+  if (err) {
+      console.log('cookie error')
+      throw err
+  }
 })
   
 

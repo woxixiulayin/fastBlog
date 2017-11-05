@@ -54,7 +54,6 @@ export default class Login extends BaseController {
             res.send(replyErrors.code400('password wrong'))
         }
 
-        res.setCookie('sessionId', req.session.sessionId)
         res.send(reply200())
     }
 }
