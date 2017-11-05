@@ -14,9 +14,23 @@ app.register(require('fastify-static'), {
 //   page403Path: path.join(__dirname, 'public', '403.html'), // optional
 //   page500Path: path.join(__dirname, 'public', '500.html')  // optional
 })
+
 app.register(require('fastify-formbody'), {}, (err) => {
   if (err) throw err
 })
+
+app.register(require('fastify-cookie'), {}, (err) => {
+  if (err) throw err
+})
+
+app.register(require('fastify-session'), {
+    secret: '123456',
+    cookieName: 'sessionId'
+    },
+    (err) => {
+  if (err) throw err
+})
+
 
 router.createRoutes(app, controllers)
 

@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>注册</h1>
+    <div id="form">
+        <p>用户名：<input type="text" name="name"></p>
+        <p>密码：<input type="password" name="password"></p>
+        <p id="result"></p>
+        <button id="submit">提交</button>
+    </div>
+
+    <script src="/public/global_modules/zepto.js"></script>
+    <script>
+        $('#submit').click(() => {
+            $.post('/signup', {
+                name: $("input[name=name]").val(),
+                password: $("input[name=password]").val(),
+            }, data => {
+                console.log(data)
+                if (data.statusCode === 400) {
+                    $('#result').html('用户已存在');
+                } else if (data.statusCode === 200) {
+                    $('#result').html('注册成功');
+                }
+            })
+        })
+    </script>
+</body>
