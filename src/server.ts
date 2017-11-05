@@ -29,8 +29,12 @@ app.register(require('fastify-cookie'), {}, (err) => {
 
 app.register(require('fastify-session'), {
     secret: '123456',
-    cookieName: 'sessionId'
-    },
+    cookieName: 'sessionId',
+    cookie: {
+        // close secure to enable set cookie in http
+        secure: false
+    }
+},
     (err) => {
   if (err) throw err
 })
