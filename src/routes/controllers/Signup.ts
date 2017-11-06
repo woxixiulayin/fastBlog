@@ -2,7 +2,7 @@ import { httpMethod, path, before } from '../decorators'
 import { FastifyReply } from 'fastify'
 import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
 import { User } from 'models'
-import BaseController from './BaseController'
+import BaseController from '../BaseController'
 
 const log = require('pino')({ level: 'info' })
 

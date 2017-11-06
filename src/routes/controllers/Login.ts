@@ -2,7 +2,7 @@ import { httpMethod, path, before } from '../decorators'
 import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
 import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
 import { User, Session } from 'models'
-import BaseController from './BaseController'
+import BaseController from '../BaseController'
 import * as pino from 'pino'
 
 const log = pino()
@@ -14,6 +14,10 @@ export default class Login extends BaseController {
     }
 
     static async checkAuthority(req: IFastifyRequest, rep: IFastifyReply) {
+        
+        if (!req.session) {
+            rep.send(replyErrors.code500('can font find session'))
+        }
 
         const sessionId = req.session.sessionId
 
@@ -37,6 +41,13 @@ export default class Login extends BaseController {
         const isAuthorized = await Login.checkAuthority(req, res)
         if (!isAuthorized) {
             res.send(replyErrors.code400('not authorized'))
+        }
+    }
+
+    static async needNoAuth(req: IFastifyRequest, res: IFastifyReply) {
+        const isAuthorized = await Login.checkAuthority(req, res)
+        if (isAuthorized) {
+            res.send(replyErrors.code400('has been authorized'))
         }
     }
 
@@ -127,4 +138,5 @@ export default class Login extends BaseController {
         }
 
     }
+
 }

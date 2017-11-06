@@ -7,4 +7,18 @@
     <h1>这是首页</h1>
     <a href="/signup">注册</a>
     <a href="/login">登录</a>
+    <a id="logout" href="#">登出</a>
+    <p id="result"></p>
+    <script src="/public/global_modules/zepto.js"></script>
+    <script>
+        $('#logout').click(() => {
+            $.post('/logout', {}, data => {
+                if (data.statusCode === 200) {
+                    return $('#result').html('退出成功')
+                }
+
+                $('#result').html('退出失败')
+            })
+        })
+    </script>
 </body>

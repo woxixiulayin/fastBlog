@@ -1,6 +1,7 @@
 import * as router from './router'
 import * as decorators from './decorators'
-import controllers, { BaseController } from './controllers'
+import * as controllers from './controllers'
+import BaseController from './BaseController'
 
 export {
     router,

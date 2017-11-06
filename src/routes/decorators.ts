@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import BaseController from './controllers/BaseController'
+import BaseController from 'routes/BaseController'
 import { FastifyRequest, FastifyReply, FastifyMiddleware } from 'fastify'
 const log = require('pino')({ level: 'info' })
 

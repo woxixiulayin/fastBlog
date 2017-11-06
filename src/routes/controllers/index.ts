@@ -1,15 +1,11 @@
-import BaseController from './BaseController'
 import Home from './Home'
 import Signup from './Signup'
 import Login from './Login'
 
-export default {
+export {
     Home,
     Signup,
     Login
 }
 
-export {
-    BaseController
-}
 

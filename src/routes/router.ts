@@ -1,4 +1,4 @@
-import { BaseController } from './controllers'
+import BaseController from 'routes/BaseController'
 import { symbolHttpMethod, symbolPathKey, symbolBefore } from './decorators'
 import { FastifyInstance, HTTPMethod } from 'fastify'
 import * as pino from 'pino'
