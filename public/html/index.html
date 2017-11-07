@@ -12,7 +12,7 @@
     <script src="/public/global_modules/zepto.js"></script>
     <script>
         $('#logout').click(() => {
-            $.post('/logout', {}, data => {
+            $.get('/logout', {}, data => {
                 if (data.statusCode === 200) {
                     return $('#result').html('退出成功')
                 }

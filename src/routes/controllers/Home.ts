@@ -33,25 +33,23 @@ export default class Home extends BaseController {
         /**
      * 用户登出接口
      */
-    @httpMethod('post')
+    @httpMethod('get')
     @path('/logout')
-    async logout(req: IFastifyRequest, rep: IFastifyReply) {
-        log.info(req)
-        return rep.send(reply200())
-        // const isAuthoorized = await Login.checkAuthority(req, rep)
+    async logout(param, req: IFastifyRequest, rep: IFastifyReply) {
+        const isAuthoorized = await Login.checkAuthority(req, rep)
 
-        // if (!isAuthoorized) {
-        //     return rep.send(replyErrors.code401('not authorized'))
-        // }
+        if (!isAuthoorized) {
+            return rep.send(replyErrors.code401('not authorized'))
+        }
 
-        //  const sessionId = req.session.sessionId
-        //  try {
-        //      await Session.findOneAndRemove({
-        //          sessionId
-        //      })
-        //     rep.send(reply200())
-        //  } catch (e) {
-        //      throw e
-        //  }
+         const sessionId = req.session.sessionId
+         try {
+             await Session.findOneAndRemove({
+                 sessionId
+             })
+            rep.send(reply200())
+         } catch (e) {
+             throw e
+         }
      }
 }
