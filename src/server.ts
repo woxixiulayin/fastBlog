@@ -3,7 +3,7 @@ import 'models'
 import * as path from 'path'
 import * as fastify from 'fastify'
 import config from '../config'
-import { router, controllers, } from './routes'
+import { router, controllers } from './routes'
 
 const app: fastify.FastifyInstance = fastify()
 

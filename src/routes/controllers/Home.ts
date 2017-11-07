@@ -37,6 +37,7 @@ export default class Home extends BaseController {
     @path('/logout')
     async logout(req: IFastifyRequest, rep: IFastifyReply) {
         log.info(req)
+        return rep.send(reply200())
         // const isAuthoorized = await Login.checkAuthority(req, rep)
 
         // if (!isAuthoorized) {

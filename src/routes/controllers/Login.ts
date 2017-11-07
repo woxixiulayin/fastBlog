@@ -16,24 +16,28 @@ export default class Login extends BaseController {
     static async checkAuthority(req: IFastifyRequest, rep: IFastifyReply) {
         
         if (!req.session) {
-            rep.send(replyErrors.code500('can font find session'))
+            log.info('can font find session')
+            return rep.send(replyErrors.code500('can font find session'))
         }
 
         const sessionId = req.session.sessionId
 
         if (!sessionId) {
-            rep.send(replyErrors.code500('session is not set'))
+            log.info('session is not set')
+            return rep.send(replyErrors.code500('session is not set'))
         }
 
         let session
         try {
             session = await Session.findOne({ sessionId })
             if (session) {
+                log.info('session has been find, already login')
                 return true
             }
         } catch(e) {
             throw e
         }
+        log.info('session cont not find')
         return false
     }
 
@@ -56,7 +60,7 @@ export default class Login extends BaseController {
     async root(param, req: IFastifyRequest, res: IFastifyReply) {
         const isAuthorized = await Login.checkAuthority(req, res)
 
-        if (res.sent) return
+        // if (res.sent) return
 
         if(isAuthorized) {
             return res.send(replyErrors.code405('has already login'))
@@ -77,11 +81,11 @@ export default class Login extends BaseController {
         name = '',
         password = '',
     } = {}, req: IFastifyRequest, res: IFastifyReply) {
-
         const isAuthorized = await Login.checkAuthority(req, res)
 
         if (isAuthorized) {
-           return res.send(replyErrors.code405('has login')) 
+            log.info('has login')
+            return res.send(replyErrors.code405('has login')) 
         }
 
         log.info('has login?: ', isAuthorized)
@@ -109,9 +113,9 @@ export default class Login extends BaseController {
         log.info('user:', user)
 
         try {
-            await Session.find({
+            await Session.findOneAndRemove({
                 uuid: user._id
-            }).remove()
+            })
         } catch (e) {
             log.info(e)
             throw e
@@ -131,7 +135,8 @@ export default class Login extends BaseController {
 
         try {
             await session.save()
-            log.info(user, 'login')
+            log.info(user)
+            log.info('login')
             return res.send(reply200())
         } catch (e) {
             throw e

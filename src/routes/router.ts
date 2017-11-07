@@ -5,7 +5,7 @@ import * as pino from 'pino'
 
 const log = pino()
 
-const createRoutes = (app: FastifyInstance, controllers: BaseController) => {
+const createRoutes = (app: FastifyInstance, controllers: any) => {
     log.info(`controllers is`, controllers)
     Object.keys(controllers).forEach((controllerName: string) => {
 
