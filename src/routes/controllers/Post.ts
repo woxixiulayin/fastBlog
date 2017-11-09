@@ -19,7 +19,9 @@ export default class PostController extends BaseController {
     @httpMethod('get')
     @path('/:id')
     async getPost(param, req: IFastifyRequest, rep: IFastifyReply) {
-        const { id = '' } = req
+
+        const { id = '' } = param
+    
         let _id
 
         try {
