@@ -26,9 +26,9 @@ const shapeError = (statusCode: number): Function => (message: string): IAjaxRet
 const replyErrors = {
     // Bad Request: 客户端请求的语法错误，服务器无法理解
     code400: shapeError(400),
-    // Unauthorized: 请求要求用户的身份认证
+    // Unauthorized: 未授权
     code401: shapeError(401),
-    // Unauthorized: 请求要求用户的身份认证
+    // forbidden: 禁止访问
     code403: shapeError(403),
     // checkUserLogin: 服务器无法根据客户端的请求找到资源（网页
     code404: shapeError(404),

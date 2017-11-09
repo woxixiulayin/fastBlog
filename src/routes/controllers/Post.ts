@@ -3,7 +3,8 @@ import { Types } from 'mongoose'
 import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
 import { FastifyReply } from 'fastify'
 import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
-import { Post } from 'models'
+import Login from './Login'
+import { Post, User, Session } from 'models'
 import BaseController from '../BaseController'
 
 
@@ -13,6 +14,26 @@ export default class PostController extends BaseController {
     constructor() {
         super()
         this.baseUrl = '/post'
+    }
+
+    @httpMethod('post')
+    @path('/')
+    async createPost({
+            title = '',
+            content = '',
+        } : {
+            title: string,
+            content: string
+        }, req: IFastifyRequest, rep: IFastifyReply) {
+
+        const isLogin = await Login.checkAuthority(req, rep)
+
+        if (!isLogin) {
+            return rep.send(replyErrors.code401('not verified'))
+        }
+
+        const sessionId = req.cookies.sessionId
+
     }
 
     // 返回文章modal
