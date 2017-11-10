@@ -7,7 +7,7 @@ import {
     Ref
 } from 'typegoose'
 
-import { User } from './User'
+import { User, Post } from '.'
 
 /**
  * UserSchema
@@ -15,12 +15,7 @@ import { User } from './User'
 
 
 // remember class's name will be used as connection's name, don't waste time on it!!
-class Post extends Typegoose {
-
-    @prop({
-        required: true,
-    })
-    title: string
+class Comment extends Typegoose {
 
     @prop({ ref: User, required: true })
     author: Ref<User>
@@ -30,16 +25,16 @@ class Post extends Typegoose {
     })
     content: string
 
-    @prop()
-    pv ? : number
+    @prop({
+        required: true,
+        ref: Post
+    })
+    post: Ref<Post>
 
     @prop({ required: true, default: Date.now })
     createdAt ? : Date
 }
 
-const PostModal = new Post().getModelForClass(Post);
+const PostModal = new Comment().getModelForClass(Comment);
 
 export default PostModal
-export {
-    Post
-}

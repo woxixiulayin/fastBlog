@@ -59,11 +59,48 @@ export default class PostController extends BaseController {
         }))
     }
 
-    // 返回文章modal
+    // 删除文章
+    @httpMethod('delete')
+    @path('/:id')
+    async deletePost(param, req: IFastifyRequest, rep: IFastifyReply) {
+        let user,
+            post
+        let { id = 0 } = param
+
+        user = await Login.auth(req, rep)
+
+        if (!id) {
+            return rep.send(replyErrors.code400('wrong param'))
+        }
+
+        if (!user) {
+            return rep.send(replyErrors.code401('not verified'))
+        }
+
+        try {
+            post = await Post.findOne({ _id: id })
+
+            if (!post) {
+                return rep.send(replyErrors.code404('can not find '))
+            }
+
+            if (!post.author.equals(user._id)) {
+                return rep.send(replyErrors.code403(`can operate others' assets`))
+            }
+
+            await post.remove()
+
+            return rep.send(reply200())
+        } catch (e) {
+            throw e
+        }
+
+    }
+
+    // 获取某篇文章
     @httpMethod('get')
     @path('/:id')
     async getPost(param, req: IFastifyRequest, rep: IFastifyReply) {
-        let _id
         const { id = '' } = param
 
         let post
