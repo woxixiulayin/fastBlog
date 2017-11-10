@@ -31,7 +31,7 @@ export default class PostController extends BaseController {
 
         user = await Login.auth(req, rep)
 
-        if (!req.session.user) {
+        if (!user) {
             return rep.send(replyErrors.code401('not verified'))
         }
 
@@ -47,6 +47,8 @@ export default class PostController extends BaseController {
             })
 
             post.save()
+            console.log(post
+            )
         } catch (e) {
              rep.send(replyErrors.code500('save fail'))
             throw e

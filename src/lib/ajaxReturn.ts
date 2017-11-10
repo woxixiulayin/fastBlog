@@ -4,7 +4,7 @@ interface IAjaxReturn {
     data: object,
 }
 
-function reply200 ( data: object ): IAjaxReturn {
+function reply200 ( data: object = {} ): IAjaxReturn {
     return {
     statusCode: 200,
     message: 'ok',

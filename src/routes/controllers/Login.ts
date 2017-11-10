@@ -16,17 +16,17 @@ export default class Login extends BaseController {
     static async auth(req: IFastifyRequest, rep: IFastifyReply) {
         let session, sessionId, user
 
-        if (req.session.user) return
+        if (req.session.user) return req.session.user
 
         sessionId = req.session.sessionId
 
         try {
             session = await Session.findOne({ sessionId })
-            if (!session) return
+            if (!session) return false
 
             user = await User.findOne({ _id: session.uuid })
 
-            if (!user) return
+            if (!user) return false
 
             req.session.user = user
 
