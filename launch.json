@@ -5,7 +5,7 @@
         "env": {
             "NODE_ENV": "development"
         },
-        "watch": true,
+        "watch": "./src",
         "cwd": "/Users/Jackson/work/web/blog/fastBlog/",
         "interpreter_args": "-r tsconfig-paths/register"
     }]

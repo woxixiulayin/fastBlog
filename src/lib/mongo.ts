@@ -6,7 +6,7 @@ const log = pino()
 
 log.info('connecting...')
 
-mongoose.connect(config.mongodb)
+mongoose.connect(config.mongodb, { useMongoClient: true})
 mongoose.Promise = global.Promise
 
 // 一下这行会打开数据库连接

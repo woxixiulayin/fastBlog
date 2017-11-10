@@ -3,8 +3,11 @@ import {
     ModelType,
     Typegoose,
     InstanceType,
-    pre
+    pre,
+    Ref
 } from 'typegoose'
+
+import { User } from './User'
 
 /**
  * UserSchema
@@ -12,11 +15,6 @@ import {
 
 
 // remember class's name will be used as connection's name, don't waste time on it!!
-@pre<Post>('save', next => {
-    if (!this.createAt) {
-        this.createAt =  Date.now
-    }
-})
 class Post extends Typegoose {
 
     @prop({
@@ -24,8 +22,8 @@ class Post extends Typegoose {
     })
     title: string
 
-    @prop()
-    author ? : string
+    @prop({ ref: User, required: true })
+    author: Ref<User>
 
     @prop({
         required: true

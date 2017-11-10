@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest} from 'fastify'
+import { User } from 'models'
 
 export interface IFastifyRequest extends FastifyRequest {
     cookies: {
@@ -16,5 +17,6 @@ export interface session {
     sessionId: string,
     encryptedSessionId: string,
     sessionData: object,
-    expires: any
+    expires: any,
+    user: typeof User,
 }

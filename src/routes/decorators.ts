@@ -42,4 +42,3 @@ export const before = (handler: Function): Function => {
         Reflect.defineMetadata(symbolBefore, beforeHandler, target, propertyKey)
     }
 }
-

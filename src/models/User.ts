@@ -3,7 +3,8 @@ import {
     ModelType,
     Typegoose,
     InstanceType,
-    pre
+    pre,
+    Ref
 } from 'typegoose'
 
 /**
@@ -19,6 +20,9 @@ class User extends Typegoose {
         unique: true,
     })
     name: string
+
+    @prop({ ref: User })
+    _id: Ref<User>
 
     @prop()
     nickname ? : string
@@ -55,3 +59,6 @@ const UserModal = new User().getModelForClass(User);
 // })()
 
 export default UserModal
+export {
+    User
+}

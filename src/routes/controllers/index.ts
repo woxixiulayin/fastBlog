@@ -7,7 +7,5 @@ export {
     Home,
     Signup,
     Login,
-    Post
+    Post,
 }
-
-

@@ -13,6 +13,29 @@ export default class Login extends BaseController {
         this.baseUrl = '/login'
     }
 
+    static async auth(req: IFastifyRequest, rep: IFastifyReply) {
+        let session, sessionId, user
+
+        if (req.session.user) return
+
+        sessionId = req.session.sessionId
+
+        try {
+            session = await Session.findOne({ sessionId })
+            if (!session) return
+
+            user = await User.findOne({ _id: session.uuid })
+
+            if (!user) return
+
+            req.session.user = user
+
+            return user
+        } catch (e) {
+            throw e
+        }
+    }
+
     static async checkAuthority(req: IFastifyRequest, rep: IFastifyReply) {
         
         if (!req.session) {

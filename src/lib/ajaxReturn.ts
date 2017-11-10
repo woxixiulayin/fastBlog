@@ -4,16 +4,10 @@ interface IAjaxReturn {
     data: object,
 }
 
-function reply200 ({
-    msg = 'success',
-    data = null,
-}: {
-    msg?: string,
-    data?: object
-} = {}): IAjaxReturn {
+function reply200 ( data: object ): IAjaxReturn {
     return {
     statusCode: 200,
-    message: msg,
+    message: 'ok',
     data
 }}
 
