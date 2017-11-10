@@ -8,7 +8,7 @@ import { Post, User, Session } from 'models'
 import BaseController from '../BaseController'
 
 
-const pageCount = 20
+const pageCount = 15
 
 export default class PostController extends BaseController {
     constructor() {
@@ -66,17 +66,6 @@ export default class PostController extends BaseController {
         let _id
         const { id = '' } = param
 
-        // try {
-        //     _id = Types.ObjectId(id)
-        //     console.log(id)
-        // } catch (e) {
-        //     rep.send(replyErrors.code400('wrong param id'))
-        // }
-
-        // if (!_id) {
-        //     return rep.send(replyErrors.code400('param wrong'))
-        // }
-
         let post
 
         try {
@@ -95,14 +84,20 @@ export default class PostController extends BaseController {
     }
 
 
+    /**
+     * /post/list?page=10
+     * @param param 
+     * @param req 
+     * @param rep 
+     */
     @httpMethod('get')
     @path('/list')
     async getPostList(param, req: IFastifyRequest, rep: IFastifyReply) {
         const { page = 0 } = param
-        const skipCount = page * 20
+        const skipCount = page * pageCount
         let posts
         try {
-            posts = await Post.find().sort({ createAt: -1 }).skip(skipCount).limit(pageCount)
+            posts = await Post.find().sort({ createAt: +1 }).skip(skipCount).limit(pageCount)
             return rep.send(reply200(posts))
         } catch (e) {
             rep.send(replyErrors.code500('internal error'))
