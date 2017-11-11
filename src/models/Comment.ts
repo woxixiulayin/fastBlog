@@ -7,7 +7,8 @@ import {
     Ref
 } from 'typegoose'
 
-import { User, Post } from '.'
+import { User } from './User'
+import { Post } from './Post'
 
 /**
  * UserSchema

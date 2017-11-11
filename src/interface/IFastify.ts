@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest} from 'fastify'
-import { User } from 'models'
+import { User } from '../models'
 
 export interface IFastifyRequest extends FastifyRequest {
     cookies: {

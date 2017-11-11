@@ -21,8 +21,7 @@ class User extends Typegoose {
     })
     name: string
 
-    @prop({ ref: User })
-    _id: Ref<User>
+    _id: any
 
     @prop()
     nickname ? : string

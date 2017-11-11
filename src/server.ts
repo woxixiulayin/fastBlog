@@ -1,9 +1,9 @@
-import 'lib/mongo'
-import 'models'
+import './lib/mongo'
+import * as fs from 'fs'
 import * as path from 'path'
 import * as fastify from 'fastify'
-import config from '../config'
 import { router, controllers } from './routes'
+const config = JSON.parse(fs.readFileSync(path.resolve('../config.json'), { encoding: 'utf-8'}))
 
 const app: fastify.FastifyInstance = fastify()
 

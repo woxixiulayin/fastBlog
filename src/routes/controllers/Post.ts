@@ -1,10 +1,10 @@
 import { httpMethod, path, before } from '../decorators'
 import { Types } from 'mongoose'
-import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
+import { IFastifyReply, IFastifyRequest } from '../../interface/IFastify'
 import { FastifyReply } from 'fastify'
-import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
+import { reply200, replyErrors, IAjaxReturn } from '../../lib/ajaxReturn'
 import { Login } from '.'
-import { Post, User, Session } from 'models'
+import { Post, User, Session } from '../../models'
 import BaseController from '../BaseController'
 
 

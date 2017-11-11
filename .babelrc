@@ -1,13 +1,7 @@
 {
-    "presets": [
-        "es2015",
-        "stage-0"
-    ],  
+    "presets": ["es2015", "stage-0"],
     "plugins": [
-        ["module-resolver", {
-        "alias": {
-            "lib/*": "./src/lib"
-        }
-        }]
-    ]
+      "transform-async-to-generator",
+      "transform-decorators-legacy"
+  ]
 }

@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es6",
+        "target": "es2015",
+        "lib": [
+            "es2015"
+        ],
         "noImplicitAny": false,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
@@ -9,8 +12,9 @@
         "allowJs": true,
         "sourceMap": false,
         "baseUrl": ".",
-        "rootDir": ".",
+        "rootDir": "src",
         "watch": true,
+        "outDir": "dist",
         "paths": {
             "config": [
                 "config.js"

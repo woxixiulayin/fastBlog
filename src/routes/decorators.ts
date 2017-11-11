@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import BaseController from 'routes/BaseController'
+import BaseController from './BaseController'
 import { FastifyRequest, FastifyReply, FastifyMiddleware } from 'fastify'
 const log = require('pino')({ level: 'info' })
 
@@ -20,6 +20,7 @@ export const path = (path: string): Function => {
         descriptor.value = function(req: FastifyRequest, res: FastifyReply) {
             const params = {...req.body, ...req.query, ...req.params}
             // oldMethod should be called in target not this - -!
+            console.log(`visitor: ${req.req.method} ${path}`)
             return oldMethod.call(target, params, req, res)
         }
     }

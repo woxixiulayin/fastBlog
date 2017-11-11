@@ -1,9 +1,9 @@
-import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
+import { IFastifyReply, IFastifyRequest } from '../../interface/IFastify'
 import { httpMethod, path, before } from '../decorators'
-import { User, Session } from 'models'
+import { User, Session } from '../../models'
 import { Login } from '.'
 import BaseController from '../BaseController'
-import { reply200, replyErrors } from 'lib/ajaxReturn'
+import { reply200, replyErrors } from '../../lib/ajaxReturn'
 const log = require('pino')({ level: 'info' })
 
 export default class Home extends BaseController {
@@ -14,6 +14,7 @@ export default class Home extends BaseController {
     @httpMethod('get')
     @path('/')
     root({}, req, res) {
+        console.log('home')
         return res.sendFile('html/index.html')
     }
 

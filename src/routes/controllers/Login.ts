@@ -1,7 +1,7 @@
 import { httpMethod, path, before } from '../decorators'
-import { IFastifyReply, IFastifyRequest } from 'interface/IFastify'
-import { reply200, replyErrors, IAjaxReturn } from 'lib/ajaxReturn'
-import { User, Session } from 'models'
+import { IFastifyReply, IFastifyRequest } from '../../interface/IFastify'
+import { reply200, replyErrors, IAjaxReturn } from '../../lib/ajaxReturn'
+import { User, Session } from '../../models'
 import BaseController from '../BaseController'
 import * as pino from 'pino'
 
@@ -158,8 +158,7 @@ export default class Login extends BaseController {
 
         try {
             await session.save()
-            log.info(user)
-            log.info('login')
+            log.info('login', user)
             return res.send(reply200())
         } catch (e) {
             throw e

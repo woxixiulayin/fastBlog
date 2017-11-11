@@ -1,12 +1,10 @@
 {
     "apps": [{
         "name": "fastblog",
-        "script": "/Users/Jackson/work/web/blog/fastBlog/src/server.ts",
+        "script": "server.js",
         "env": {
             "NODE_ENV": "development"
         },
-        "watch": "./src",
-        "cwd": "/Users/Jackson/work/web/blog/fastBlog/",
-        "interpreter_args": "-r tsconfig-paths/register"
+        "cwd": "./dist"
     }]
 }
