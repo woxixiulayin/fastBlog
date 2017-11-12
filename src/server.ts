@@ -1,9 +1,13 @@
-import './lib/mongo'
+import mongo from './lib/mongo'
+import logger from './lib/logger'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as fastify from 'fastify'
-import { router, controllers } from './routes'
-const config = JSON.parse(fs.readFileSync(path.resolve('../config.json'), { encoding: 'utf-8'}))
+
+const config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), { encoding: 'utf-8'}))
+mongo.connect(config.mongodb)
+
+import { createRoutes } from './router'
 
 const app: fastify.FastifyInstance = fastify()
 
@@ -39,11 +43,10 @@ app.register(require('fastify-session'), {
   if (err) throw err
 })
 
-
-router.createRoutes(app, controllers)
+createRoutes(app)
 
 // Run the server!
 app.listen(config.port, (err) => {
   if (err) throw err
-  console.log(`app listen at port: ${config.port}`)
+  console.log(`app listen en at port: ${config.port}`)
 })

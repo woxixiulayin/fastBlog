@@ -8,6 +8,6 @@ export default class BaseController extends Object {
     constructor() {
         super()
         this.baseUrl = '/'
-        log.info(`created controller ${this.constructor.name}`)
+        log.info(`created controller with ${this.constructor.name}`)
     }
 }

@@ -1,26 +1,27 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import * as bluebird from 'bluebird'
 import mongoose = require('mongoose')
 import * as pino from 'pino'
 
-const config = JSON.parse(fs.readFileSync(path.resolve('../config.json'), { encoding: 'utf-8'}))
+global.Promise = bluebird
+mongoose.Promise = global.Promise
 
-const log = pino()
+const connect = (url: string) => {
+    console.log('connecting...')
+    mongoose.connect(url, {
+        useMongoClient: true,
+    })
+    console.log("mongoose.Promise === bluebird: ", mongoose.Promise.ES6 === bluebird)
+    const db = mongoose.connection
+    db.on('error', e => {
+        console.error('can not connect mongodb')
+        throw e
+    })
+    db.on('open', () => console.log('mongodb has been successfully open'))
+    return db
+}
 
-log.info('connecting...')
-
-mongoose.Promise = require('bluebird')
-mongoose.connect(config.mongodb, {
-    useMongoClient: true,
-})
-
-// 一下这行会打开数据库连接
-const db = mongoose.connection
-
-db.on('error', e => {
-    log.error('can not connect mongodb')
-    throw e
-})
-db.on('open', () => log.info('mongodb has been successfully open'))
-
-export default db
+export default {
+    connect
+}

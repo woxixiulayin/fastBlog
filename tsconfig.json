@@ -11,19 +11,9 @@
         "experimentalDecorators": true,
         "allowJs": true,
         "sourceMap": false,
-        "baseUrl": ".",
+        "baseUrl": "src",
         "rootDir": "src",
-        "watch": true,
-        "outDir": "dist",
-        "paths": {
-            "config": [
-                "config.js"
-            ],
-            "*": [
-                "src/*",
-                "node_modules/*"
-            ]
-        }
+        "outDir": "dist"
     },
     "modules": "commonjs",
     "exclude": [

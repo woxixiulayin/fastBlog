@@ -27,15 +27,15 @@
     "@types/node" "*"
 
 "@types/mongoose@^4.7.24":
-  version "4.7.25"
-  resolved "http://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-4.7.25.tgz#d31b34c1ade8e1649f41710094275204ba07388d"
+  version "4.7.26"
+  resolved "http://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-4.7.26.tgz#edc5b5f6b060d9f8c2688e72b98fe4b5159cae2d"
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^8.0.45":
-  version "8.0.49"
-  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-8.0.49.tgz#417f86ab4829c629fe561779ee48751e0fe2a11b"
+  version "8.0.51"
+  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-8.0.51.tgz#b31d716fb8d58eeb95c068a039b9b6292817d5fb"
 
 "@types/pino@^4.7.0":
   version "4.7.0"
@@ -125,8 +125,8 @@ async@2.1.4:
     lodash "^4.14.0"
 
 avvio@^3.0.0:
-  version "3.0.0"
-  resolved "http://registry.npm.taobao.org/avvio/download/avvio-3.0.0.tgz#952c7e2dd182c8dae413fdf65af4edba8b91ddde"
+  version "3.1.1"
+  resolved "http://registry.npm.taobao.org/avvio/download/avvio-3.1.1.tgz#f869312704876dfb51bca667836bce63bed57a6f"
   dependencies:
     debug "^3.1.0"
     fastq "^1.5.0"
@@ -782,8 +782,8 @@ clone@^0.2.0:
   resolved "http://registry.npm.taobao.org/clone/download/clone-0.2.0.tgz#c6126a90ad4f72dbf5acdb243cc37724fe93fc1f"
 
 clone@^1.0.0, clone@^1.0.2:
-  version "1.0.2"
-  resolved "http://registry.npm.taobao.org/clone/download/clone-1.0.2.tgz#260b7a99ebb1edfe247538175f783243cb19d149"
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/clone/download/clone-1.0.3.tgz#298d7e2231660f40c003c2ed3140decf3f53085f"
 
 co@^4.6.0:
   version "4.6.0"
@@ -794,8 +794,8 @@ code-point-at@^1.0.0:
   resolved "http://registry.npm.taobao.org/code-point-at/download/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
 color-convert@^1.9.0:
-  version "1.9.0"
-  resolved "http://registry.npm.taobao.org/color-convert/download/color-convert-1.9.0.tgz#1accf97dd739b983bf994d56fec8f95853641b7a"
+  version "1.9.1"
+  resolved "http://registry.npm.taobao.org/color-convert/download/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"
   dependencies:
     color-name "^1.1.1"
 
@@ -1095,8 +1095,8 @@ fastify-plugin@^0.1.0, fastify-plugin@^0.1.1:
     semver "^5.3.0"
 
 fastify-session@^0.1.0:
-  version "0.1.0"
-  resolved "http://registry.npm.taobao.org/fastify-session/download/fastify-session-0.1.0.tgz#3459e4118a0f3eabf6c26f4c433ae1d623cc566a"
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/fastify-session/download/fastify-session-0.1.1.tgz#42a12a0bbdc672165fd35caf23577a2f2ca52785"
   dependencies:
     cookie-signature "^1.0.6"
     fastify-plugin "^0.1.1"
@@ -1987,8 +1987,8 @@ mkdirp@^0.5.0:
     minimist "0.0.8"
 
 moment@^2.19.1:
-  version "2.19.1"
-  resolved "http://registry.npm.taobao.org/moment/download/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
+  version "2.19.2"
+  resolved "http://registry.npm.taobao.org/moment/download/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
 
 mongodb-core@2.1.11:
   version "2.1.11"
@@ -2038,8 +2038,8 @@ mongoose@4.11.1:
     sliced "1.0.1"
 
 mongoose@^4.12.4:
-  version "4.13.0"
-  resolved "http://registry.npm.taobao.org/mongoose/download/mongoose-4.13.0.tgz#81bb266e045d66ac8dfdd84fc6749c873d7a6ac4"
+  version "4.13.1"
+  resolved "http://registry.npm.taobao.org/mongoose/download/mongoose-4.13.1.tgz#c9e203f0847bd5068b5210b0c09b48f847c9eb95"
   dependencies:
     async "2.1.4"
     bson "~1.0.4"
@@ -2297,8 +2297,8 @@ pino-colada@^1.4.0:
     split2 "^2.1.1"
 
 pino@^4.8.1, pino@^4.9.0:
-  version "4.9.0"
-  resolved "http://registry.npm.taobao.org/pino/download/pino-4.9.0.tgz#2cbb42645a5789847b2072759e3625b76bb791bb"
+  version "4.10.0"
+  resolved "http://registry.npm.taobao.org/pino/download/pino-4.10.0.tgz#b27098b3cb0f0758f0242c2a8449b7094020a5c0"
   dependencies:
     chalk "^2.0.1"
     fast-json-parse "^1.0.0"

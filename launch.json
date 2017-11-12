@@ -1,10 +1,11 @@
 {
     "apps": [{
         "name": "fastblog",
-        "script": "server.js",
+        "script": "src/server.ts",
         "env": {
             "NODE_ENV": "development"
         },
-        "cwd": "./dist"
+        "watch": true,
+        "cwd": "."
     }]
 }

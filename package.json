@@ -5,6 +5,10 @@
   "main": "index",
   "author": "Jackson Liu (416883813@qq.com)",
   "license": "MIT",
+  "scripts": {
+      "dev": "pm2 start launch.json && pm2 log fastblog",
+      "start": "tsc "
+  },
   "dependencies": {
     "@types/debug": "^0.0.30",
     "@types/mongoose": "^4.7.24",

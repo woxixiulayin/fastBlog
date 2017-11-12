@@ -3,6 +3,7 @@ import { IFastifyReply, IFastifyRequest } from '../../interface/IFastify'
 import { reply200, replyErrors, IAjaxReturn } from '../../lib/ajaxReturn'
 import { User, Session } from '../../models'
 import BaseController from '../BaseController'
+import * as mongoose from 'mongoose'
 import * as pino from 'pino'
 
 const log = pino()
@@ -19,9 +20,12 @@ export default class Login extends BaseController {
         if (req.session.user) return req.session.user
 
         sessionId = req.session.sessionId
-
+        console.log(1)
         try {
+        console.log(1.5)
+        console.log(mongoose.Promise.ES6)
             session = await Session.findOne({ sessionId })
+        console.log(2)
             if (!session) return false
 
             user = await User.findOne({ _id: session.uuid })
@@ -29,9 +33,11 @@ export default class Login extends BaseController {
             if (!user) return false
 
             req.session.user = user
+        console.log(3)
 
             return user
         } catch (e) {
+            console.log('auth error')
             throw e
         }
     }
@@ -81,11 +87,13 @@ export default class Login extends BaseController {
     @httpMethod('get')
     @path('/')
     async root(param, req: IFastifyRequest, res: IFastifyReply) {
-        const isAuthorized = await Login.checkAuthority(req, res)
+        // const isAuthorized = await Login.checkAuthority(req, res)
+        console.log('run get login')
+        const user = await Login.auth(req, res)
 
         // if (res.sent) return
 
-        if(isAuthorized) {
+        if(user) {
             return res.send(replyErrors.code405('has already login'))
         }
 

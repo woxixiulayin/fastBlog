@@ -1,5 +1,4 @@
 import { httpMethod, path, before } from '../decorators'
-import { Types } from 'mongoose'
 import { IFastifyReply, IFastifyRequest } from '../../interface/IFastify'
 import { FastifyReply } from 'fastify'
 import { reply200, replyErrors, IAjaxReturn } from '../../lib/ajaxReturn'
