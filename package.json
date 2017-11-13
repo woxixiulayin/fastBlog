@@ -6,8 +6,9 @@
   "author": "Jackson Liu (416883813@qq.com)",
   "license": "MIT",
   "scripts": {
-      "dev": "pm2 start launch.json && pm2 log fastblog",
-      "start": "tsc "
+      "dev": "pm2 delete fast-blog-dev && pm2 start --watch ./src -n fast-blog-dev --attach --interpreter ts-node src/server.ts",
+      "first-start": "pm2 start -n fast-blog-pro --interpreter ts-node src/server.ts",
+      "start": "pm2 restart fast-blog-pro"
   },
   "dependencies": {
     "@types/debug": "^0.0.30",
