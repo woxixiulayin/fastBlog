@@ -44,6 +44,7 @@ export default class Signup extends BaseController {
             return replyErrors.code400('use has already exists')
         }
         user = new User({ name, password, ...otherParam})
+
         try {
             await user.save()
             return reply200()
