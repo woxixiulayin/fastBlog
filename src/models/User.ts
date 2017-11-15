@@ -5,7 +5,7 @@ import {
     InstanceType,
     pre,
     Ref
-} from 'typegoose'
+} from '../lib/typegoose'
 
 /**
  * UserSchema

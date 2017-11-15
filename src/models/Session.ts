@@ -4,7 +4,7 @@ import {
     Typegoose,
     InstanceType,
     pre
-} from 'typegoose'
+} from '../lib/typegoose'
 import * as mongoose from 'mongoose'
 
 console.log('create session class')
