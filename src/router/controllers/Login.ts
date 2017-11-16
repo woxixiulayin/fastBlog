@@ -20,10 +20,7 @@ export default class Login extends BaseController {
         if (req.session.user) return req.session.user
 
         sessionId = req.session.sessionId
-        console.log(1)
         try {
-        console.log(1.5)
-        console.log(mongoose.Promise.ES6)
             session = await Session.findOne({ sessionId })
         console.log(2)
             if (!session) return false

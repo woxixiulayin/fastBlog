@@ -1,3 +1,4 @@
+import { ArrayPropOptions } from './../../lib/typegoose/prop.d';
 import { httpMethod, path, before } from '../decorators'
 import { IFastifyReply, IFastifyRequest } from '../../interface/IFastify'
 import { FastifyReply } from 'fastify'
@@ -18,24 +19,19 @@ export default class PostController extends BaseController {
     // 创建文章
     @httpMethod('post')
     @path('/')
-    async createPost({
-            title = '',
-            content = '',
-        } : {
-            title: string,
-            content: string
-        }, req: IFastifyRequest, rep: IFastifyReply) {
+    async createPost(param, req: IFastifyRequest, rep: IFastifyReply) {
+        const { title = '', content = '' } = param
         let post,
             user
 
         user = await Login.auth(req, rep)
 
         if (!user) {
-            return rep.send(replyErrors.code401('not verified'))
+            return replyErrors.code401('not verified')
         }
 
         if (!title || !content) {
-            return rep.send(replyErrors.code400('wrong param'))
+            return replyErrors.code400('wrong param')
         }
 
         try {
@@ -69,18 +65,18 @@ export default class PostController extends BaseController {
         user = await Login.auth(req, rep)
 
         if (!id) {
-            return rep.send(replyErrors.code400('wrong param'))
+            return replyErrors.code400('wrong param')
         }
 
         if (!user) {
-            return rep.send(replyErrors.code401('not verified'))
+            return replyErrors.code401('not verified')
         }
 
         try {
             post = await Post.findOne({ _id: id })
-
+            console.log(post)
             if (!post) {
-                return rep.send(replyErrors.code404('can not find '))
+                return replyErrors.code404('can not find post')
             }
 
             if (!post.author.equals(user._id)) {
@@ -119,6 +115,36 @@ export default class PostController extends BaseController {
         }
     }
 
+    // 修改文章
+    @httpMethod('put')
+    @path('/:id')
+    async updatePost(param, req: IFastifyRequest, rep: IFastifyReply) {
+        const { id = '', ...otherParam } = param
+        let post,
+            user
+        console.log(param)
+        user = await Login.auth(req, rep)
+
+        if (!user) {
+            return replyErrors.code401('not verified')
+        }
+
+
+        try {
+            post = await Post.findByIdAndUpdate({ _id: id }, otherParam)
+
+            if (!post) {
+                return replyErrors.code400('can not find post')
+            }
+
+            post.save()
+        } catch (e) {
+            rep.send(replyErrors.code500('internal error'))
+            throw e
+        }
+
+        return reply200()
+    }
 
     /**
      * /post/list?page=10

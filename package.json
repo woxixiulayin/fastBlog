@@ -6,7 +6,7 @@
   "author": "Jackson Liu (416883813@qq.com)",
   "license": "MIT",
   "scripts": {
-    "dev": "pm2 delete fast-blog-dev && pm2 start --watch ./src -n fast-blog-dev --attach --interpreter ts-node src/server.ts",
+    "dev": "pm2 delete all && pm2 start --watch ./src -n fast-blog-dev --attach  src/server.ts",
     "first-start": "tsc -p tsconfig.json && pm2 start -n fast-blog-pro dist/server.js",
     "start": "git pull origin master && tsc -p tsconfig.json && pm2 restart fast-blog-pro"
   },
