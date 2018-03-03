@@ -15,7 +15,7 @@ export default class Home extends BaseController {
     @path('/')
     root({}, req, res) {
         console.log('home')
-        return res.sendFile('html/index.html')
+        return res.sendFile('dist/index.html')
     }
 
     @httpMethod('get')

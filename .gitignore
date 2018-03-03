@@ -1,5 +1,8 @@
 node_modules/
+.cache/
 config.json
 config.js
 .vscode/
 dist/
+public/dist
+yarn-error.log

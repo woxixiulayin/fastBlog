@@ -116,7 +116,6 @@ export default class Login extends BaseController {
             return res.send(replyErrors.code405('has login')) 
         }
 
-        log.info('has login?: ', isAuthorized)
         if (!name || !password) {
             return res.send(replyErrors.code400('param error'))
         }

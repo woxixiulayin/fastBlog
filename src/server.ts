@@ -13,7 +13,7 @@ const app: fastify.FastifyInstance = fastify()
 
 app.register(require('fastify-static'), {
   root: path.join(__dirname, '../public'),
-  prefix: '/public/', // optional: default '/'
+  prefix: '/public', // optional: default '/'
 //   page404Path: path.join(__dirname, 'public', '404.html'), // optional
 //   page403Path: path.join(__dirname, 'public', '403.html'), // optional
 //   page500Path: path.join(__dirname, 'public', '500.html')  // optional
