@@ -1,0 +1,111 @@
+.clearfix {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+body{
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.relative {
+    position: relative;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.inline-block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+.hide {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  @extend .clearfix;
+}
+
+.full {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.pointer {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.height-0.height-0 {
+    overflow: hidden;
+    height: 0;
+}
+.no-select {
+    user-select: none;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.trans-dura-4 {
+    transition: all .3s ease-in-out;
+}
+
+.relative.relative {
+    position: relative;
+}
+
+.absolute.absolute {
+    position: absolute;
+}
+
+.flex {
+    display: flex;
+}
+
+.disabled.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.text-break {
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-all;
+}
+
+.span-btn {
+    color: #3c8cd2;
+    @extend .pointer;
+    &:hover {
+        color: #63a3db;
+    }
+}
