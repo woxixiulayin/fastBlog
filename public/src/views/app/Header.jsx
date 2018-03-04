@@ -9,7 +9,7 @@ class Header extends Component {
              className="text-center relative"
             >
                 <nav className="nav clearfix">
-                    <div className="links left">
+                    <div className="links">
                     {navList.map(item => 
                         <NavLink
                           exact
@@ -22,6 +22,7 @@ class Header extends Component {
                             {item.zH}
                         </NavLink>
                     )}
+                    <a href="https://github.com/woxixiulayin" target="_blank">github</a>
                     </div>
                 </nav>
                 <h2>Jackson Liu</h2>

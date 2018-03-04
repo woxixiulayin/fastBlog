@@ -3,9 +3,11 @@ header {
     background: #169fe6;
     padding: 16px 32px;;
     .nav {
+        width: 100%;
         .links {
-            width: 100px;
+            text-align: left;
             a {
+                display: inline-block;
                 padding: .3em .5em;
                 color: white;
                 text-decoration: none;
