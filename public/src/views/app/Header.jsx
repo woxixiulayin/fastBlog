@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import navConfig from 'src/routes/config'
+
+
 
 class Header extends Component {
     render() {

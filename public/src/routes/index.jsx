@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Route, HashRouter, Redirect, Switch } from 'react-router-dom'
-import navConfig from './config'
+import { navList, navMap } from './config'
 import App from 'src/views/App'
 
 const Home = () => <h1>this is home</h1>
-const navs = Object.values(navConfig)
 
 class Router extends Component {
     render() {
@@ -14,13 +13,13 @@ class Router extends Component {
                     {/* 保证只有一个路由被匹配到 */}
                     <Switch>
                         {
-                            navs.map(navItem => <Route
+                            navList.map(navItem => <Route
                                 exact
                                 key={navItem.label}
                                 path={navItem.path}
                                 component={navItem.component} />)
                         }
-                        <Redirect to={navConfig.posts.path} />
+                        <Redirect to={navMap.posts.path} />
                     </Switch>
                 </App>
             </HashRouter>

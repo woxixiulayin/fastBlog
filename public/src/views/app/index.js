@@ -5,12 +5,12 @@ import Bottom from './Bottom'
 
 import './css/app.scss'
 
-const App = props => <div>
+const App = props => <React.Fragment>
     <Header />
         <Body>
             {props.children || []}
         </Body>
     <Bottom />
-</div>
+</React.Fragment>
 
 export default App
