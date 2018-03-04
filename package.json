@@ -38,6 +38,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "reflect-metadata": "^0.1.10",
     "tsconfig-paths": "^2.3.0",
     "typescript": "^2.5.3"

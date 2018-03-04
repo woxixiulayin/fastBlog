@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './routes'
+import Router from './routes'
 
 import 'css/index.scss'
 
 ReactDOM.render(
-    <App />,
+    <Router />,
     document.querySelector('#app')
 )
 
