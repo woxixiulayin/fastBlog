@@ -1,18 +1,28 @@
 import React, { Component } from 'react'
-import navConfig from 'src/routes/config'
-
-
+import { navList } from 'src/routes/config'
+import { NavLink } from 'react-router-dom'
 
 class Header extends Component {
     render() {
         return (
             <header
-             className="text-center"
+             className="text-center relative"
             >
-                <nav>
-                    <ul>
-
-                    </ul>
+                <nav className="nav clearfix">
+                    <div className="links left">
+                    {navList.map(item => 
+                        <NavLink
+                          exact
+                          key={item.label}
+                          to={item.path}
+                          activeStyle={{
+                              color: 'black'
+                          }}
+                        >
+                            {item.zH}
+                        </NavLink>
+                    )}
+                    </div>
                 </nav>
                 <h2>Jackson Liu</h2>
             </header>
